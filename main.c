@@ -19,15 +19,17 @@ int main()
     {
         printf("No record\n");
     }
-    fseek(fp,0,SEEK_SET);
-    if(ftell(fp)!=0)
-    {
+    else{
+        printf("data found\n");
         //end
+        fseek(fp, 0L, SEEK_SET);
+
     while(!feof(fp))
     {
-       fscanf(fp,"%d\t|\t%s\t|\t%d\t|\t%d\t|\t%d\t|\t%d\t",&st[i].roll,&st[i].name,&st[i].p1,&st[i].p2,&st[i].p3);
+       fscanf(fp,"%d %s %d %d %d\n",&st[i].roll,&st[i].name,&st[i].p1,&st[i].p2,&st[i].p3);
        i++;
     }
+
     }
     m=i;
     printf("Welcome to Student Management System\n");
@@ -42,17 +44,17 @@ int main()
         scanf("%d",&ch);
         switch(ch){
 
-            case 1:
+          case 1:
 
-                printf("Number of student : ");
-          scanf("%d",&n);
+            printf("Number of student : ");
+            scanf("%d",&n);
 
           for(i=m;i<m+n;i++)//2
           {
 
               printf("Student %d\n",i+1);
               printf("\nRoll number: ");
-             /* scanf("%d",&rollno);
+              scanf("%d",&rollno);
               for(x=0;x<i;x++)
               {
                   if(rollno!=st[x].roll)
@@ -62,7 +64,7 @@ int main()
 
               }
               if(e==i)
-              {*/
+              {
               st[i].roll=rollno;
               printf("\nName: ");
               scanf("%s",&st[i].name);
@@ -74,21 +76,24 @@ int main()
               scanf("%d",&st[i].p2);
               printf("\nPaper3: ");
               scanf("%d",&st[i].p3);
-              //}
-              //else{
-              //  printf("\nRoll number is already used");
-              //}
+              fp=fopen("student.txt","w");
+                for(i=0;i<m;i++)
+                {
+                    fprintf(fp,"%d %s %d %d %d\n",&st[i].roll,&st[i].name,&st[i].p1,&st[i].p2,&st[i].p3);
+                }
+                fclose(fp);
+                printf("Record Save..!\n");
+                m+=n;
+              }
+              else{
+               printf("\nRoll number is already used\n");
+              }
 
           }
-         m+=n;
-        printf("Record Save..!\n");
 
-        fp=fopen("student.txt","w");
-        for(i=0;i<m;i++)
-        {
-            fprintf(fp,"%d\t|\t%s\t|\t%d\t|\t%d\t|\t%d\t|\t%d\t\n",st[i].roll,st[i].name,st[i].p1,st[i].p2,st[i].p3,st[i].p1+st[i].p2+st[i].p3);
-        }
-        fclose(fp);
+
+
+
 
             break;
             case 2:
@@ -134,7 +139,7 @@ int main()
                  for(i=0;i<m;i++)
                  {
                      if(st[i].roll!=0)
-                    fprintf(fp,"%d\t|\t%s\t|\t%d\t|\t%d\t|\t%d\t|\t%d\t\n",st[i].roll,st[i].name,st[i].p1,st[i].p2,st[i].p3,st[i].p1+st[i].p2+st[i].p3);
+                    fprintf(fp,"%d %s %d %d %d\n",&st[i].roll,&st[i].name,&st[i].p1,&st[i].p2,&st[i].p3);
                    }
                 fclose(fp);
                         for(i=0;i<m;i++)
@@ -209,7 +214,7 @@ int main()
                                     fp=fopen("student.txt","w");
                         for(i=0;i<m;i++)
                        {
-                           fprintf(fp,"%d\t|\t%s\t|\t%d\t|\t%d\t|\t%d\t|\t%d\t\n",st[i].roll,st[i].name,st[i].p1,st[i].p2,st[i].p3,st[i].p1+st[i].p2+st[i].p3);
+                           fprintf(fp,"%d %s %d %d %d\n",&st[i].roll,&st[i].name,&st[i].p1,&st[i].p2,&st[i].p3);
                            }
                       fclose(fp);
 
@@ -240,7 +245,7 @@ int main()
                                      fp=fopen("student.txt","w");
                                    for(i=0;i<m;i++)
                            {
-                           fprintf(fp,"%d\t|\t%s\t|\t%d\t|\t%d\t|\t%d\t|\t%d\t\n",st[i].roll,st[i].name,st[i].p1,st[i].p2,st[i].p3,st[i].p1+st[i].p2+st[i].p3);
+                           fprintf(fp,"%d %s %d %d %d\n",&st[i].roll,&st[i].name,&st[i].p1,&st[i].p2,&st[i].p3);
                            }
                       fclose(fp);
                                     printf("...OK RECORD UPDATED\n");
@@ -272,7 +277,7 @@ int main()
                                      fp=fopen("student.txt","w");
                                    for(i=0;i<m;i++)
                            {
-                           fprintf(fp,"%d\t|\t%s\t|\t%d\t|\t%d\t|\t%d\t|\t%d\t\n",st[i].roll,st[i].name,st[i].p1,st[i].p2,st[i].p3,st[i].p1+st[i].p2+st[i].p3);
+                           fprintf(fp,"%d %s %d %d %d\n",&st[i].roll,&st[i].name,&st[i].p1,&st[i].p2,&st[i].p3);
                            }
                       fclose(fp);
                                     printf("...OK RECORD UPDATED\n");
